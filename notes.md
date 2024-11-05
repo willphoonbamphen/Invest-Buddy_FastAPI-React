@@ -103,7 +103,7 @@ const FruitList = () => {
 
   const fetchFruits = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/fruits');
+      const response = await api.get('http://localhost:8000/fruits');
       setFruits(response.data.fruits);
     } catch (error) {
       console.error("Error fetching fruits", error);
@@ -112,7 +112,7 @@ const FruitList = () => {
 
   const addFruit = async (fruitName) => {
     try {
-      await axios.post('http://localhost:8000/fruits', { name: fruitName });
+      await api.post('http://localhost:8000/fruits', { name: fruitName });
       fetchFruits();  // Refresh the list after adding a fruit
     } catch (error) {
       console.error("Error adding fruit", error);
