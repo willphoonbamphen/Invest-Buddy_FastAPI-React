@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
 ```jsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from "../api.js";
 import AddFruitForm from './AddFruitForm';
 
 const FruitList = () => {
