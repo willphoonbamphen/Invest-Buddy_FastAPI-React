@@ -16,11 +16,6 @@
   - Windows: `.\venv\Scripts\activate`
 - Install the dependencies from [requirements.txt](./backend/requirements.txt)
   - `pip install -r requirements.txt`
-  - ```text
-fastapi
-uvicorn
-pydantic
-```
 
 ### Basic FastAPI Without Auth
 
