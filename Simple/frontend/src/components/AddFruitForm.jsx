@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AddFruitForm = ({ addFruit }) => {
   const [fruitName, setFruitName] = useState('');
@@ -23,5 +24,10 @@ const AddFruitForm = ({ addFruit }) => {
     </form>
   );
 };
+AddFruitForm.propTypes = {
+  addFruit: PropTypes.func.isRequired,
+  
+};
+
 
 export default AddFruitForm;

@@ -13,6 +13,7 @@ class Fruits(BaseModel):
     fruits: List[Fruit]
 
 
+
 app = FastAPI(debug=True)
 
 origins = [
@@ -28,7 +29,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-memory_db = {"fruits": []}
+memory_db = {
+    "fruits": []  # Initialize the "fruits" key with an empty list
+}
 
 @app.get("/fruits", response_model=Fruits)
 def get_fruits():
@@ -38,6 +41,11 @@ def get_fruits():
 @app.post("/fruits")
 def add_fruit(fruit: Fruit):
     memory_db["fruits"].append(fruit)
+    return fruit
+
+@app.delete("/fruits")
+def delete_fruit(fruit: Fruit):
+    memory_db["fruits"].remove(fruit)
     return fruit
 
 
