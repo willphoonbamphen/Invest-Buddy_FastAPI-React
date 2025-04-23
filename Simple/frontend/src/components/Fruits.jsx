@@ -23,6 +23,15 @@ const FruitList = () => {
     }
   };
 
+  const deleteFruit = async (fruitName) => {
+    try {
+      await api.delete('/fruits', { name: fruitName });
+      fetchFruits();  // Refresh the list after adding a fruit
+    } catch (error) {
+      console.error("Error adding fruit", error);
+    }
+  };
+
   useEffect(() => {
     fetchFruits();
   }, []);
