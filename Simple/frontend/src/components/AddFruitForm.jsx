@@ -1,43 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import FruitList from './Fruits';
+import fruits from './Fruits';
 
 const AddFruitForm = ({ addFruit , deleteFruit }) => {
   const [fruitName, setFruitName] = useState('');
-  const [fruitNameRef, setFruitNameRef] = useState('');
+  const ALERT_MESSAGE = 'Please enter a fruit name';
 
-  const handleSubmit = (event) => {
+
+  const handleAdd = async (event) => {
     event.preventDefault();
-    for (let i = 0; i < FruitList.length; i++) {
-      if (fruitName === FruitList[i]) {
-        alert('Please enter a different fruit name');
-        setFruitNameRef('');
-        return;
-      }
-    }
     if (fruitName) {
       addFruit(fruitName);
       setFruitName('');
     }
     else {
-      alert('Please enter a fruit name');
+      alert(ALERT_MESSAGE);
     }
-  };
+  }
 
-  const handleDelete = (event) => {
+  const handleDelete = async (event) => {
     event.preventDefault();
-    
-    if (fruitName===fruitNameRef) {
+    if (fruitName) {
       deleteFruit(fruitName);
       setFruitName('');
-      setFruitNameRef('');
     }
     else {
-      alert('Please enter a fruit name');
+      alert("DELETE ERROR");
     }
-  };
-
-
+  }
 
   return (
     <form >
@@ -47,11 +37,12 @@ const AddFruitForm = ({ addFruit , deleteFruit }) => {
         onChange={(e) => setFruitName(e.target.value)}
         placeholder="Enter fruit name"
       />
-      <button onClick={handleSubmit}>Add Fruit</button>
+      <button onClick={handleAdd}>Add Fruit</button>
       <button onClick={handleDelete}>Delete Fruit</button>
     </form>
   );
-};
+}
+
 AddFruitForm.propTypes = {
   addFruit: PropTypes.func.isRequired,
   deleteFruit: PropTypes.func.isRequired,
