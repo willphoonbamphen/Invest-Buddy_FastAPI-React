@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import PropTypes from 'prop-types';
 import fruits from './Fruits';
 
@@ -29,6 +29,8 @@ const AddFruitForm = ({ addFruit , deleteFruit }) => {
     }
   }
 
+
+
   return (
     <form >
       <input
@@ -46,6 +48,7 @@ const AddFruitForm = ({ addFruit , deleteFruit }) => {
 AddFruitForm.propTypes = {
   addFruit: PropTypes.func.isRequired,
   deleteFruit: PropTypes.func.isRequired,
+
 
 };
 

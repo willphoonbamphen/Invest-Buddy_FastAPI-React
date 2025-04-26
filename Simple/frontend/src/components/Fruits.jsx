@@ -46,7 +46,7 @@ const FruitList = () => {
           <li key={index}>{fruit.name}</li>
         ))}
       </ul>
-      <AddFruitForm addFruit={addFruit} deleteFruit={deleteFruit}/>
+      <AddFruitForm addFruit={addFruit} deleteFruit={deleteFruit} fetchFruits={fetchFruits}/>
     </div>
   );
 };

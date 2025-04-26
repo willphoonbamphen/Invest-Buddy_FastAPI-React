@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
-from fastapi import Query
 
 app = FastAPI(debug=True)
 
@@ -47,9 +46,9 @@ def add_fruit(fruit: Fruit):
 
 @app.put("/fruits")
 async def update_fruit(fruit: Fruit):
-    for existing_fruit in memory_db["fruits"]:
-        if existing_fruit["name"] == fruit.name:
-            memory_db["fruits"].pop(existing_fruit)
+    for i in memory_db["fruits"]:
+        if memory_db["fruits"][i] == fruit.name:
+            memory_db["fruits"].pop(i)
             return {"message": f"Fruit '{fruit.name}' deleted successfully"}
     return {"error": f"Fruit '{fruit.name}' already exists"}, 400
             
