@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List , Dict
-
+import settrade_v2
 
 app = FastAPI(debug=True)
 
