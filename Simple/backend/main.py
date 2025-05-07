@@ -2,7 +2,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
+from typing import List , Dict
+
 
 app = FastAPI(debug=True)
 
@@ -14,13 +15,12 @@ origins = [
 class Fruit(BaseModel):
     name: str
 
-class Fruits(BaseModel):
+class FruitsList(BaseModel):
     fruits: List[Fruit]
 
 memory_db = {
-    "fruits": []  # Initialize the "fruits" key with an empty list
+    "fruits": []
 }
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,29 +31,31 @@ app.add_middleware(
 )
 
 
-@app.get("/fruits", response_model=Fruits)
-def get_fruits():
-    return Fruits(fruits=memory_db["fruits"])
-
-    
+@app.get("/fruits", response_model=FruitsList)
+async def get_fruits():
+    return FruitsList(fruits=memory_db["fruits"])
 
 
 @app.post("/fruits")
-def add_fruit(fruit: Fruit):   
-    memory_db["fruits"].append(fruit.dict())
-    return {"message": f"Fruit '{fruit.name}' added successfully"}
+async def add_fruit(fruit : Fruit):   
+    memory_db["fruits"].append(fruit)
     return fruit
 
-@app.put("/fruits")
-async def update_fruit(fruit: Fruit):
-    for i in memory_db["fruits"]:
-        if memory_db["fruits"][i] == fruit.name:
-            memory_db["fruits"].pop(i)
-            return {"message": f"Fruit '{fruit.name}' deleted successfully"}
-    return {"error": f"Fruit '{fruit.name}' already exists"}, 400
-            
     
-    
+#@app.put("/fruits/{fruit_name}")
+#async def delete_fruit_by_name(fruit_name: str):
+ #   memory_db["fruits"] = [fruit for fruit in memory_db["fruits"] if fruit.name != fruit_name]
+ #   return {"message": f"Fruit '{fruit_name}' deleted"}
+ 
+
+@app.delete("/fruits/{fruit_name}")
+async def update_fruit_by_name(fruit_name: str, updated_fruit: Fruit):
+    for index, fruit in enumerate(memory_db["fruits"]):
+        if fruit.name == fruit_name:
+            memory_db["fruits"].pop(index)
+            return 
+    return {"message": f"Fruit '{fruit_name}' not found"}
+
 
 
 if __name__ == "__main__":

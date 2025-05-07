@@ -1,13 +1,13 @@
 import React, { useState , useEffect } from 'react';
 import PropTypes from 'prop-types';
-import fruits from './Fruits';
+
 
 const AddFruitForm = ({ addFruit , deleteFruit }) => {
   const [fruitName, setFruitName] = useState('');
   const ALERT_MESSAGE = 'Please enter a fruit name';
 
 
-  const handleAdd = async (event) => {
+  const handleAdd = (event) => {
     event.preventDefault();
     if (fruitName) {
       addFruit(fruitName);
@@ -18,14 +18,14 @@ const AddFruitForm = ({ addFruit , deleteFruit }) => {
     }
   }
 
-  const handleDelete = async (event) => {
+  const handleDelete = (event) => {
     event.preventDefault();
     if (fruitName) {
       deleteFruit(fruitName);
       setFruitName('');
     }
     else {
-      alert("DELETE ERROR");
+      alert(ALERT_MESSAGE);
     }
   }
 

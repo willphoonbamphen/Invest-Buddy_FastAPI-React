@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import FruitList from './components/Fruits';
+import FruitList from './components/FruitList';
 
 const App = () => {
   return (
